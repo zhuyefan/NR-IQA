@@ -187,6 +187,12 @@ def run(train_batch_size, epochs, lr, weight_decay, config, exp_id, log_dir, tra
             best_criterion = SROCC
             best_epoch = engine.state.epoch
             torch.save(model.state_dict(), trained_model_file) # 将整个模型的字典中参数存入到这个trained_model_file文件名
+            """
+            # 保存训练的模型：
+             torch.save(model.state_dict(),"Linear.pth")
+           # 加载预训练模型的参数
+           model.load_state_dict(torch.load("Linear.pth"))
+            """
 
 
     @trainer.on(Events.EPOCH_COMPLETED) #当一个 epoch 结束时, 会触发此事件
