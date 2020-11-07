@@ -16,10 +16,10 @@ def default_loader(path):
     return Image.open(path).convert('L') #
 
 
-def LocalNormalization(patch, P=3, Q=3, C=1): # 对像素块进行转换操作   ####在论文中体现出来得是特征优化
+def LocalNormalization(patch, P=3, Q=3, C=1): # 对像素块进行转换操作   ####在论文中体现出来得是特征优化  
     kernel = np.ones((P, Q)) / (P * Q)
-    patch_mean = convolve2d(patch, kernel, boundary='symm', mode='same') # 2维的卷积,返回2维数据，卷积核为3x3
-    patch_sm = convolve2d(np.square(patch), kernel, boundary='symm', mode='same')# 对平方求卷积
+    patch_mean = convolve2d(patch, kernel, boundary='symm', mode='same') # 2维的卷积,返回2维数据，卷积核为3x3 图像的均值滤波
+    patch_sm = convolve2d(np.square(patch), kernel, boundary='symm', mode='same')# 对平方求卷积 对图像像素平方求均值滤波
     patch_std = np.sqrt(np.maximum(patch_sm - np.square(patch_mean), 0)) + C # 进行求差，再与0比较
     patch_ln = torch.from_numpy((patch - patch_mean) / patch_std).float().unsqueeze(0) # 转换为tensor格式并增加一个维度（通道）
     return patch_ln
