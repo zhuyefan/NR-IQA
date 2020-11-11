@@ -16,6 +16,7 @@ def default_loader(path):
     return Image.open(path).convert('L') #
 
 #局部归一化亮度系数（MSCN）常用于图像或视频处理的特征优化
+#因为论文验证 自然图像的局部归一化亮度系数满足高斯分布，可以通过偏离程度反映出失真程度
 def LocalNormalization(patch, P=3, Q=3, C=1): # 对像素块进行转换操作   ####在论文中体现出来得是特征优化  
     kernel = np.ones((P, Q)) / (P * Q)
     patch_mean = convolve2d(patch, kernel, boundary='symm', mode='same') # 2维的卷积,返回2维数据，卷积核为3x3 图像的均值滤波
