@@ -236,7 +236,7 @@ trainer.run()
 """
 
 if __name__ == "__main__":
-    parser = ArgumentParser(description='PyTorch CNNIQA')
+    parser = ArgumentParser(description='PyTorch CNNIQA') # 这就是一个简单的一个示例说明，告诉读者各个参数的意义，方便理解
     parser.add_argument("--seed", type=int, default=19920517)
     parser.add_argument('--batch_size', type=int, default=128,
                         help='input batch size for training (default: 128)')
